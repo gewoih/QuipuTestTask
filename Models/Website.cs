@@ -1,6 +1,7 @@
 ﻿using QuipuTestTask.Models.Base;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net;
 
 namespace QuipuTestTask.Models
 {
@@ -13,25 +14,30 @@ namespace QuipuTestTask.Models
 			set => Set(ref _Url, value);
 		}
 
-		private string _WebsiteContent;
-		public string WebsiteContent
+		private int _TagsCount;
+		public int TagsCount
 		{
-			get => _WebsiteContent;
-			set => Set(ref _WebsiteContent, value);
+			get => _TagsCount;
+			set => Set(ref _TagsCount, value);
 		}
 
-		private ObservableCollection<string> _Tags;
-		public ObservableCollection<string> Tags
-		{
-			get => _Tags;
-			set => Set(ref _Tags, value);
-		}
-
+		//Завершен ли поиск тэгов по этому сайту?
 		private bool _IsDone;
 		public bool IsDone
 		{
 			get => _IsDone;
 			set => Set(ref _IsDone, value);
 		}
+
+		//Найдено ли на этом сайте больше всего тэгов?
+		private bool _IsWinner;
+		public bool IsWinner
+		{
+			get => _IsWinner;
+			set => Set(ref _IsWinner, value);
+		}
+
+		//Содержимое сайта
+		public string WebsiteContent => new WebClient().DownloadString(this.Url);
 	}
 }
