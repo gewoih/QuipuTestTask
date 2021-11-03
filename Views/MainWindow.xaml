@@ -4,11 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuipuTestTask"
+		xmlns:vm="clr-namespace:QuipuTestTask.ViewModels"
         mc:Ignorable="d"
         Title="QuipuTestTask"
 		Height="450" Width="800"
 		FontSize="20">
 
+	<Window.DataContext>
+		<vm:MainWindowViewModel/>
+	</Window.DataContext>
+	
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
