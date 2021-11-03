@@ -100,7 +100,8 @@ namespace QuipuTestTask.ViewModels
 			this.CancellationToken.Cancel(false);
 			MessageBox.Show("Поиск тэгов остановлен.");
 
-			//После остановки поиска ищем Website с наибольшим числом тэгов, чтобы выделить его определенным цветом
+			//После остановки поиска сбрасываем токен и ищем Website с наибольшим числом тэгов, чтобы выделить его определенным цветом
+			this.CancellationToken = null;
 			this.FindWinner();
 		}
 		#endregion
