@@ -7,8 +7,9 @@
 		xmlns:vm="clr-namespace:QuipuTestTask.ViewModels"
         mc:Ignorable="d"
         Title="QuipuTestTask"
-		Height="450" Width="800"
-		FontSize="20">
+		Height="720" Width="1024"
+		FontSize="20"
+		WindowStartupLocation="CenterScreen">
 
 	<Window.DataContext>
 		<vm:MainWindowViewModel/>
@@ -22,9 +23,9 @@
 
 		<StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
 			<TextBlock Text="{Binding FilePath}"/>
-			<Button x:Name="BrowseFileButton" Content="Выбор файла" Command="{Binding BrowseFileCommand}" Width="200"/>
-			<Button x:Name="StartSearchButton" Content="Начать поиск" Command="{Binding StartSearchTagsCommand}" Width="200"/>
-			<Button x:Name="StopSearchButton" Content="Остановить поиск" Command="{Binding StopSearchTagsCommand}" Width="200"/>
+			<Button x:Name="BrowseFileButton" Content="Выбор файла" Command="{Binding BrowseFileCommand, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+			<Button x:Name="StartSearchButton" Content="Начать поиск" Command="{Binding StartSearchTagsCommand, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+			<Button x:Name="StopSearchButton" Content="Остановить поиск" Command="{Binding StopSearchTagsCommand, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
 		</StackPanel>
 
 		<DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding Websites}" IsReadOnly="true">

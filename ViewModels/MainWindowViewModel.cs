@@ -73,11 +73,17 @@ namespace QuipuTestTask.ViewModels
 
 		//Команда для запуска поиска тэгов
 		public ICommand StartSearchTagsCommand { get; }
-		private bool CanStartSearchTagsCommandExecute(object p) => this.Websites.Count != 0;
+		private bool CanStartSearchTagsCommandExecute(object p) => this.CancellationToken == null && this.Websites.Count != 0;
 		private void OnStartSearchTagsCommandExecuted(object p)
 		{
-			MessageBox.Show("Поиск тэгов запущен.");
+			//Перед запуском поиска на всякий случай выставляем стандартные значения для всех Website's
+			foreach (var web in Websites)
+			{
+				web.IsDone = false;
+				web.IsWinner = false;
+			}
 
+			MessageBox.Show("Поиск тэгов запущен.");
 			this.CancellationToken = new CancellationTokenSource();
 			//Для каждого Website ищем тэги
 			foreach (var website in this.Websites)
@@ -125,6 +131,13 @@ namespace QuipuTestTask.ViewModels
 				website.TagsCount = Regex.Matches(website.WebsiteContent, pattern).Count;
 				website.IsDone = true;
 			}, this.CancellationToken.Token);
+
+			//Каждый раз проверяем, не последний ли Website мы обработали, и если да, то ищем победителя
+			if (this.Websites.Count(w => w.IsDone == true) == this.Websites.Count)
+			{
+				this.CancellationToken = null;
+				this.FindWinner();
+			}
 		}
 
 		private void FindWinner()
