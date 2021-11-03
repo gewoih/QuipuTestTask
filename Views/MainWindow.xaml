@@ -21,8 +21,8 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-			<TextBlock Text="Имя файла"/>
-			<Button x:Name="BrowseFileButton" Content="Выбор файла"/>
+			<TextBlock Text="{Binding FilePath}"/>
+			<Button x:Name="BrowseFileButton" Content="Выбор файла" Command="{Binding BrowseFileCommand}"/>
 			<Button x:Name="StartSearchButton" Content="Начать поиск"/>
 			<Button x:Name="StopSearchButton" Content="Остановить поиск"/>
 		</StackPanel>
